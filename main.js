@@ -114,10 +114,10 @@
                     imageElement.src = splitTag.val;
                     storyContainer.appendChild(imageElement);
 
-                    imageElement.onload = () => {
-                        console.log(`scrollingto ${previousBottomEdge}`)
-                        scrollDown(previousBottomEdge)
-                    }
+                    // imageElement.onload = () => {
+                    //     console.log(`scrollingto ${previousBottomEdge}`)
+                    //     scrollDown(previousBottomEdge)
+                    // }
 
                     showAfter(delay, imageElement);
                     delay += 200.0;
