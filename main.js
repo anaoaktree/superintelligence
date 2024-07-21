@@ -63,6 +63,7 @@
         if(!firstTime){         
             removeAll("p");
             removeAll("img");
+            removeAll(".video-container");
             // Comment out this line if you want to leave the header visible when clearing
             setVisible(".header", false);
         }
@@ -121,6 +122,40 @@
                     showAfter(delay, imageElement);
                     delay += 200.0;
                 }
+
+                // VIDEOMP4: scr
+                else if( splitTag && splitTag.property == "VIDEOMP4" ) {
+                    const videoContainer = document.createElement('div');
+                    videoContainer.className = 'video-container';
+                  
+                    const video = document.createElement('video');
+                    video.width = 320;
+                    video.height = 240;
+                    video.controls = false;
+                    video.autoplay = true;
+                    video.muted = true;     // Many browsers require videos to be muted for autoplay
+
+                  
+                    const source = document.createElement('source');
+                    source.src = splitTag.val;
+                    source.type = 'video/mp4';
+                  
+                    video.appendChild(source);
+                    videoContainer.appendChild(video);
+                  
+                    const fallbackText = document.createTextNode('Your browser does not support the video tag.');
+                    video.appendChild(fallbackText);
+                  
+                    storyContainer.appendChild(videoContainer);
+                    
+                    // Add event listener to stop on last frame
+                    // video.addEventListener('ended', function() {
+                    //     // Set current time to 0.1 seconds before the end
+                    //     video.currentTime = video.duration - 0.1;
+                    // });
+                }
+
+                
 
                 // LINK: url
                 else if( splitTag && splitTag.property == "LINK" ) {
