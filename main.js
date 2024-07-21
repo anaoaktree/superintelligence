@@ -64,6 +64,12 @@
             removeAll("p");
             removeAll("img");
             removeAll(".video-container");
+
+            // Comment if the background image is to stay after being set
+            outerScrollContainer.style.removeProperty('background-image');
+
+
+
             // Comment out this line if you want to leave the header visible when clearing
             setVisible(".header", false);
         }
