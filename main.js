@@ -47,6 +47,18 @@
     // Kick off the start of the story!
     continueStory(true);
 
+    function clearScreen(clearHeader){
+        removeAll("p");
+        removeAll("img");
+        removeAll(".video-container");
+
+        // Comment if the background image is to stay after being set
+        outerScrollContainer.style.removeProperty('background-image');
+
+        // Comment out this line if you want to leave the header visible when clearing
+        setVisible(".header", clearHeader);
+
+    }
     
 
     // Main story processing function. Each time this is called it generates
@@ -60,18 +72,9 @@
         var previousBottomEdge = firstTime ? 0 : contentBottomEdgeY();
 
         // NEW: CLEAR ALWAYS FUNCTION
-        if(!firstTime){         
-            removeAll("p");
-            removeAll("img");
-            removeAll(".video-container");
-
-            // Comment if the background image is to stay after being set
-            outerScrollContainer.style.removeProperty('background-image');
-
-
-
-            // Comment out this line if you want to leave the header visible when clearing
-            setVisible(".header", false);
+        if(!firstTime){      
+            clearScreen(false);   
+          
         }
 
         // Generate story text - loop through available content
@@ -186,13 +189,10 @@
                 // CLEAR - removes all existing content.
                 // RESTART - clears everything and restarts the story from the beginning
                 else if( tag == "CLEAR" || tag == "RESTART" ) {
-                    removeAll("p");
-                    removeAll("img");
-
-                    // Comment out this line if you want to leave the header visible when clearing
-                    setVisible(".header", false);
-
+                    clearScreen(false)
+    
                     if( tag == "RESTART" ) {
+                        clearScreen(true)
                         restart();
                         return;
                     }
@@ -446,9 +446,7 @@
 
         let rewindEl = document.getElementById("rewind");
         if (rewindEl) rewindEl.addEventListener("click", function(event) {
-            removeAll("p");
-            removeAll("img");
-            setVisible(".header", false);
+            clearScreen(false)
             restart();
         });
 
